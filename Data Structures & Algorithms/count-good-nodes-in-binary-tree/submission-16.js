@@ -1,0 +1,34 @@
+/**
+ * Definition for a binary tree node.
+ * class TreeNode {
+ *     constructor(val = 0, left = null, right = null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+class Solution {
+    /**
+     * @param {TreeNode} root
+     * @return {number}
+     */
+    goodNodes(root) {
+let count = 1;
+
+function run(node , max){
+if(!node) return;
+if(node.val >= max){
+    max = node.val;
+    count++;
+}
+run(node.left , max);
+run(node.right , max);
+}
+
+run(root.left, root.val);
+run(root.right, root.val);
+        return count;
+    }
+}

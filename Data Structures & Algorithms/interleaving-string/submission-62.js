@@ -1,0 +1,37 @@
+class Solution {
+  /**
+   * @param {string} s1
+   * @param {string} s2
+   * @param {string} s3
+   * @return {boolean}
+   */
+  isInterleave(s1, s2, s3) {
+    let m = s1.length;
+    let n = s2.length;
+    let s = s3.length;
+    let dp = Array(m + 1).fill(Array(n + 1).fill(-1));
+    let x = 0;
+    let y = 0;
+
+    if (m + n != s) return false;
+
+    function dfs(i, j, k) {
+      if (k >= s) return i == m && j == n;
+      x++;
+      console.log("before", x);
+      if (dp[i][j] != -1) {
+        console.log("found");
+        return dp[i][j];
+      }
+      y++;
+      let res = false;
+      if (i < m && s1[i] == s3[k]) res = dfs(i + 1, j, k + 1);
+      if (!res && j < n && s2[j] == s3[k]) res = dfs(i, j + 1, k + 1);
+      dp[i][j] = res;
+      console.log("after", y);
+      return res;
+    }
+
+    return dfs(0, 0, 0);
+  }
+}
