@@ -1,0 +1,19 @@
+class Solution {
+    public int findJudge(int n, int[][] trust) {
+        
+int[] in = new int[n+1];
+int[] out = new int[n+1];
+
+for(int[] temp : trust){
+    out[temp[0]]++;
+    in[temp[1]]++;
+}
+
+for(int i = 1; i <= n; i++){
+    if(out[i] == 0 && in[i] == n-1) return i;
+}
+
+return -1;
+
+    }
+}
